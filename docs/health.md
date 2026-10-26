@@ -49,7 +49,7 @@ carry their own `desc` either way, and only the group label depends on it.
 ## `spotlight.nvim: ui.nvim`
 
 `ui.kit` moved out of `lib.nvim` into the separate
-[ui.nvim](https://github.com/StefanBartl/ui.nvim) repo, so it gets its own
+[ui.nvim](https://github.com/WKDSteve/ui.nvim) repo, so it gets its own
 section with its own install hint rather than sharing `lib.nvim`'s.
 
 | Module | Required | What is lost without it |

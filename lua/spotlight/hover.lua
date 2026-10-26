@@ -4,7 +4,7 @@
 --- You are reading a log. A request id is spotlighted, so every occurrence is
 --- coloured — but "how many, and is there another one below the fold" is a
 --- question the colours do not answer. This puts it in
---- [hover.nvim](https://github.com/StefanBartl/hover.nvim)'s float, for the
+--- [hover.nvim](https://github.com/WKDSteve/hover.nvim)'s float, for the
 --- token the cursor is on.
 ---
 --- **It answers only for tokens that are already spotlighted, and that

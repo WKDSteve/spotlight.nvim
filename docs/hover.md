@@ -3,7 +3,7 @@
 You are reading a log. A request id is spotlighted, so every occurrence is
 coloured — but *how many*, and *is there another one below the fold*, is a
 question the colours do not answer. Rest the cursor on it and
-[hover.nvim](https://github.com/StefanBartl/hover.nvim) says.
+[hover.nvim](https://github.com/WKDSteve/hover.nvim) says.
 
 ```
 req-42abc started

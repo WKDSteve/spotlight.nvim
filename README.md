@@ -18,10 +18,10 @@
 [![Neovim](https://img.shields.io/badge/Neovim-0.9%2B-57A143?logo=neovim&logoColor=white)](https://neovim.io)
 [![Lua](https://img.shields.io/badge/Lua-5.1%2FLuaJIT-2C2D72?logo=lua&logoColor=white)](https://www.lua.org)
 ![Status](https://img.shields.io/badge/status-beta-orange)
-[![CI](https://github.com/StefanBartl/spotlight.nvim/actions/workflows/ci.yml/badge.svg)](https://github.com/StefanBartl/spotlight.nvim/actions/workflows/ci.yml)
-[![wkd](https://img.shields.io/badge/wkd-family-c6ff3d)](https://stefanbartl.github.io/wkd/p/spotlight/)
+[![CI](https://github.com/WKDSteve/spotlight.nvim/actions/workflows/ci.yml/badge.svg)](https://github.com/WKDSteve/spotlight.nvim/actions/workflows/ci.yml)
+[![wkd](https://img.shields.io/badge/wkd-family-c6ff3d)](https://wkdsteve.github.io/wkd/p/spotlight/)
 
-> Part of the [wkd](https://stefanbartl.github.io/wkd/) family — see this plugin's [page](https://stefanbartl.github.io/wkd/p/spotlight/) on the site.
+> Part of the [wkd](https://wkdsteve.github.io/wkd/) family — see this plugin's [page](https://wkdsteve.github.io/wkd/p/spotlight/) on the site.
 
 Mark any number of tokens in a log at once, in colors you can tell apart, and
 keep them there. You are reading a log. You spot a request id, a PID, an IP, an
@@ -33,25 +33,25 @@ scrolling, through a `:split`.
 
 ## Around it
 
-> **[buffer-ctx.nvim](https://github.com/StefanBartl/buffer-ctx.nvim)** — its
+> **[buffer-ctx.nvim](https://github.com/WKDSteve/buffer-ctx.nvim)** — its
 > `:Mark` marks the *lines* you want to come back to; spotlight marks the
 > *tokens* you are following through them. Line context and token context side
 > by side in the same log.
 >
-> **[hover.nvim](https://github.com/StefanBartl/hover.nvim)** — asks "what is
+> **[hover.nvim](https://github.com/WKDSteve/hover.nvim)** — asks "what is
 > this" about the thing under the cursor while spotlight answers "where else is
 > it". Resting on a spotlighted token reports how often it occurs in this
 > buffer — see [docs/hover.md](docs/hover.md).
 >
-> **[cmdlog.nvim](https://github.com/StefanBartl/cmdlog.nvim)** — the other
+> **[cmdlog.nvim](https://github.com/WKDSteve/cmdlog.nvim)** — the other
 > half of reading output in the editor: the command that produced the log.
 >
-> **[my.nvim](https://github.com/StefanBartl/my.nvim)** — its
+> **[my.nvim](https://github.com/WKDSteve/my.nvim)** — its
 > `cword_occurrences` marks the word under the cursor as you move, which
 > is the transient half of the same question. This plugin is the half you
 > pin: several tokens at once, and they stay through searches and splits.
 >
-> **[mdview.nvim](https://github.com/StefanBartl/mdview.nvim)** — the browser
+> **[mdview.nvim](https://github.com/WKDSteve/mdview.nvim)** — the browser
 > preview of a Markdown file. It mirrors your whole-file spotlights into the
 > rendered document, in the same colors and live, through the read API and the
 > `User SpotlightChanged` event — see [docs/FEATURES/INTEGRATIONS.md](docs/FEATURES/INTEGRATIONS.md#mdviewnvim).
@@ -60,8 +60,8 @@ scrolling, through a `:split`.
 > switches that off.
 >
 > All of the above are soft: without them everything else works unchanged.
-> [lib.nvim](https://github.com/StefanBartl/lib.nvim) and
-> [ui.nvim](https://github.com/StefanBartl/ui.nvim) are the two real
+> [lib.nvim](https://github.com/WKDSteve/lib.nvim) and
+> [ui.nvim](https://github.com/WKDSteve/ui.nvim) are the two real
 > dependencies — see [Requirements](docs/installation.md#requirements).
 
 ---
@@ -94,7 +94,7 @@ and which question each page answers.
 - [Health check](docs/health.md) — what each line of `:checkhealth spotlight` means, section by section.
 - [Architecture](docs/architecture.md) — the `matchadd()`-not-extmarks decision and the four limitations that follow, the module tree, and the security model.
 - [Contributing](docs/CONTRIBUTING.md) — ground rules, project layout, and where a change belongs.
-- [Feedback](https://github.com/StefanBartl/spotlight.nvim/issues) — bugs, feature requests and usage questions; broader discussion in [Discussions](https://github.com/StefanBartl/spotlight.nvim/discussions).
+- [Feedback](https://github.com/WKDSteve/spotlight.nvim/issues) — bugs, feature requests and usage questions; broader discussion in [Discussions](https://github.com/WKDSteve/spotlight.nvim/discussions).
 
 `:help spotlight` is the same reference inside the editor.
 

@@ -1,6 +1,6 @@
 # spotlight.nvim — test suite
 
-Headless Neovim, run by [testing.nvim](https://github.com/StefanBartl/testing.nvim).
+Headless Neovim, run by [testing.nvim](https://github.com/WKDSteve/testing.nvim).
 The specs use the small `harness.lua` of this directory for their assertions.
 The dependencies are testing.nvim and `lib.nvim`, checked out as siblings of the
 plugin (or in `.deps/`, or named by `$TESTING_NVIM_DIR` / `$LIB_NVIM_DIR`).

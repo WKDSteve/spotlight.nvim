@@ -43,7 +43,7 @@ What Neovim offers on its own does not cover it:
     the same buffer with no highlights.
   - |:match| has three slots, no list, and no persistence.
 
-Requires Neovim 0.9+, "StefanBartl/lib.nvim" and "StefanBartl/ui.nvim". No
+Requires Neovim 0.9+, "WKDSteve/lib.nvim" and "WKDSteve/ui.nvim". No
 Treesitter. No |TextChanged| or |CursorMoved| autocommand — see
 |spotlight-matchadd|.
 
@@ -103,8 +103,8 @@ groups, registers the |:Spotlight| command and the autocommands, and — unless
 With lazy.nvim:
 >lua
     {
-      "StefanBartl/spotlight.nvim",
-      dependencies = { "StefanBartl/lib.nvim", "StefanBartl/ui.nvim" },
+      "WKDSteve/spotlight.nvim",
+      dependencies = { "WKDSteve/lib.nvim", "WKDSteve/ui.nvim" },
       event = "VeryLazy",
       config = function()
         require("spotlight").setup()
@@ -921,7 +921,7 @@ credentials, `:Spotlight persist off` is the switch that keeps them out of it
 ==============================================================================
 20. LIB.NVIM INTEGRATION                                        *spotlight-lib*
 
-"StefanBartl/lib.nvim" and "StefanBartl/ui.nvim" are both required
+"WKDSteve/lib.nvim" and "WKDSteve/ui.nvim" are both required
 dependencies. Four modules are hard requirements:
 
     lib.nvim.bindings.usercmd.composer   the :Spotlight verb

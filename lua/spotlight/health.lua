@@ -25,7 +25,7 @@ local LIB_MODULES = {
 }
 
 --- Separate from LIB_MODULES: ui.kit moved out of lib.nvim into its own
---- ui.nvim repo, so a missing entry here needs "Install StefanBartl/ui.nvim",
+--- ui.nvim repo, so a missing entry here needs "Install WKDSteve/ui.nvim",
 --- not the lib.nvim hint every LIB_MODULES entry shares.
 ---@type { module: string, purpose: string, required: boolean }[]
 local UI_NVIM_MODULES = {
@@ -67,7 +67,7 @@ function M.check()
     if pcall(require, entry.module) then
       ok(("%s — %s"):format(entry.module, entry.purpose))
     elseif entry.required then
-      error_(("%s missing — %s will not work"):format(entry.module, entry.purpose), { 'Install "StefanBartl/lib.nvim"' })
+      error_(("%s missing — %s will not work"):format(entry.module, entry.purpose), { 'Install "WKDSteve/lib.nvim"' })
     else
       info(("%s missing — %s falls back to a native equivalent"):format(entry.module, entry.purpose))
     end
@@ -79,7 +79,7 @@ function M.check()
     if pcall(require, entry.module) then
       ok(("%s — %s"):format(entry.module, entry.purpose))
     elseif entry.required then
-      error_(("%s missing — %s will not work"):format(entry.module, entry.purpose), { 'Install "StefanBartl/ui.nvim"' })
+      error_(("%s missing — %s will not work"):format(entry.module, entry.purpose), { 'Install "WKDSteve/ui.nvim"' })
     else
       info(("%s missing — %s falls back to a native equivalent"):format(entry.module, entry.purpose))
     end

@@ -5,7 +5,7 @@ spotlight never opens a UI it does not own.
 
 ## hover.nvim
 
-With [hover.nvim](https://github.com/StefanBartl/hover.nvim) installed,
+With [hover.nvim](https://github.com/WKDSteve/hover.nvim) installed,
 resting the cursor on a **spotlighted** token says how often it occurs in this
 buffer. Only for tokens that are already spotlighted — a spotlight is a
 decision the reader already made about *this* token, and it is the only signal
@@ -54,7 +54,7 @@ the entries into its own menu.
 
 ## mdview.nvim
 
-[mdview.nvim](https://github.com/StefanBartl/mdview.nvim) previews a Markdown
+[mdview.nvim](https://github.com/WKDSteve/mdview.nvim) previews a Markdown
 file in the browser, and mirrors your spotlights into it: mark `SYSsystosca` or
 `400 (Bad Request)` here and every occurrence in the rendered document is
 marked there too, in the same color, within about a second. It is built on the
@@ -82,7 +82,7 @@ preview tabs. If a shared screen must not show what you marked, set mdview's
 
 ## casedesk.nvim
 
-[casedesk.nvim](https://github.com/StefanBartl/casedesk.nvim) keeps the
+[casedesk.nvim](https://github.com/WKDSteve/casedesk.nvim) keeps the
 spotlights **per case**: it saves what you marked into the case folder and puts
 it back when you open that case, so "these markings are from case X, those from
 case Y" survives switching and restarting. It is built on `spotlight.export()` /

@@ -2,8 +2,8 @@
 
 ## Requirements
 
-Neovim **0.9+**, [lib.nvim](https://github.com/StefanBartl/lib.nvim), and
-[ui.nvim](https://github.com/StefanBartl/ui.nvim). No Treesitter, no LSP, no
+Neovim **0.9+**, [lib.nvim](https://github.com/WKDSteve/lib.nvim), and
+[ui.nvim](https://github.com/WKDSteve/ui.nvim). No Treesitter, no LSP, no
 external binary.
 
 Both are **required** dependencies, not a nicety: the `:Spotlight` verb is
@@ -24,7 +24,7 @@ Optional, each detected at runtime and degrading to nothing when absent:
 | | |
 | --- | --- |
 | `git` | Persistence keyed by git root. Without it, state falls back to the working directory |
-| [hover.nvim](https://github.com/StefanBartl/hover.nvim) | The occurrence count over a spotlighted token |
+| [hover.nvim](https://github.com/WKDSteve/hover.nvim) | The occurrence count over a spotlighted token |
 | [nvzone/menu](https://github.com/nvzone/menu) | A host for the context-menu entries — see [FEATURES/INTEGRATIONS.md](FEATURES/INTEGRATIONS.md) |
 
 ## Which loading strategy
@@ -44,8 +44,8 @@ none at all.
 
 ```lua
 {
-  "StefanBartl/spotlight.nvim",
-  dependencies = { "StefanBartl/lib.nvim", "StefanBartl/ui.nvim" },
+  "WKDSteve/spotlight.nvim",
+  dependencies = { "WKDSteve/lib.nvim", "WKDSteve/ui.nvim" },
   event = "VeryLazy",
   opts = {},
 }
@@ -56,8 +56,8 @@ none at all.
 
 ```lua
 {
-  "StefanBartl/spotlight.nvim",
-  dependencies = { "StefanBartl/lib.nvim", "StefanBartl/ui.nvim" },
+  "WKDSteve/spotlight.nvim",
+  dependencies = { "WKDSteve/lib.nvim", "WKDSteve/ui.nvim" },
   event = "VeryLazy",
   opts = {
     persist = { default = false },   -- opt-in instead of opt-out
@@ -70,8 +70,8 @@ none at all.
 
 ```lua
 use({
-  "StefanBartl/spotlight.nvim",
-  requires = { "StefanBartl/lib.nvim", "StefanBartl/ui.nvim" },
+  "WKDSteve/spotlight.nvim",
+  requires = { "WKDSteve/lib.nvim", "WKDSteve/ui.nvim" },
   config = function()
     require("spotlight").setup()
   end,
@@ -82,16 +82,16 @@ use({
 
 ```lua
 local add = MiniDeps.add
-add({ source = "StefanBartl/spotlight.nvim", depends = { "StefanBartl/lib.nvim", "StefanBartl/ui.nvim" } })
+add({ source = "WKDSteve/spotlight.nvim", depends = { "WKDSteve/lib.nvim", "WKDSteve/ui.nvim" } })
 require("spotlight").setup()
 ```
 
 ## vim-plug
 
 ```vim
-Plug 'StefanBartl/lib.nvim'
-Plug 'StefanBartl/ui.nvim'
-Plug 'StefanBartl/spotlight.nvim'
+Plug 'WKDSteve/lib.nvim'
+Plug 'WKDSteve/ui.nvim'
+Plug 'WKDSteve/spotlight.nvim'
 " after plug#end():
 lua require("spotlight").setup()
 ```
@@ -101,9 +101,9 @@ lua require("spotlight").setup()
 ```lua
 require("paq")({
   "savq/paq-nvim",
-  "StefanBartl/lib.nvim",
-  "StefanBartl/ui.nvim",
-  "StefanBartl/spotlight.nvim",
+  "WKDSteve/lib.nvim",
+  "WKDSteve/ui.nvim",
+  "WKDSteve/spotlight.nvim",
 })
 require("spotlight").setup()
 ```
@@ -112,9 +112,9 @@ require("spotlight").setup()
 
 ```lua
 vim.pack.add({
-  { src = "https://github.com/StefanBartl/lib.nvim" },
-  { src = "https://github.com/StefanBartl/ui.nvim" },
-  { src = "https://github.com/StefanBartl/spotlight.nvim" },
+  { src = "https://github.com/WKDSteve/lib.nvim" },
+  { src = "https://github.com/WKDSteve/ui.nvim" },
+  { src = "https://github.com/WKDSteve/spotlight.nvim" },
 })
 require("spotlight").setup()
 ```

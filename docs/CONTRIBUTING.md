@@ -1,7 +1,7 @@
 # Contributing to spotlight.nvim
 
 Thank you for your interest! Bugs, ideas and questions are welcome in the
-[issue tracker](https://github.com/StefanBartl/spotlight.nvim/issues); pull
+[issue tracker](https://github.com/WKDSteve/spotlight.nvim/issues); pull
 requests very welcome.
 
 Read [`architecture.md`](architecture.md) first. One decision — `matchadd()`
@@ -19,7 +19,7 @@ vim.opt.rtp:prepend("/path/to/spotlight.nvim")
 require("spotlight").setup({})
 ```
 
-[lib.nvim](https://github.com/StefanBartl/lib.nvim) has to be on the runtime
+[lib.nvim](https://github.com/WKDSteve/lib.nvim) has to be on the runtime
 path too. Nothing else — no Treesitter, no LSP, no external binary.
 
 Test against a genuinely large log, not a fixture. The whole point of this
@@ -106,7 +106,7 @@ selection left by then.
 ## Tests
 
 `TESTS/` is a headless spec suite, run by
-[testing.nvim](https://github.com/StefanBartl/testing.nvim).
+[testing.nvim](https://github.com/WKDSteve/testing.nvim).
 
 ```
 bash scripts/test.sh
