@@ -40,6 +40,7 @@ is written to be independent of the others: a spec that drives `:Spotlight ...` 
 | `config_edge_spec.lua`     | The remaining normalizers, `get()`'s dot path, and the options/DEFAULTS aliasing.    |
 | `commands_spec.lua`        | Every `:Spotlight` route, the facade actions, and the preset keymaps.                |
 | `keymaps_spec.lua`         | The keymap *declaration*: action order, per-mode binds, the which-key group prefix.  |
+| `keymaps_press_spec.lua`   | Every preset key actually pressed (`nvim_feedkeys`, both modes) and its effect read back. |
 | `autocmds_spec.lua`        | The window/buffer/colour/persistence autocmds, driven through the real events.       |
 | `match_ledger_spec.lua`    | `core.match` directly: the eligibility gate, `reconcile_window`, forget vs. clear.   |
 | `count_edge_spec.lua`      | The entry caps, the 5000-line chunk boundary, and the pinned-item merges.            |
