@@ -8,7 +8,8 @@
 -- trailing full stop. A value text for a value the argument does not offer shows nowhere, so that
 -- is pinned too.
 --
--- Skipped on a lib.nvim without `help.undocumented` / `arg_desc` (older than the argument texts).
+-- A lib.nvim without `help.undocumented` / `arg_desc` (older than the argument texts) fails the
+-- case by name instead of skipping it (NEW-43).
 
 local t = require("harness")
 
@@ -32,7 +33,7 @@ function M.run()
       and type(entries.arg_desc) == "function"
     )
   then
-    print("  skip :Spotlight option float tests (lib.nvim has no argument texts)")
+    t.ok("option float: lib.nvim lacks composer.help.undocumented / entries.arg_desc: update lib.nvim", false)
     return
   end
 
