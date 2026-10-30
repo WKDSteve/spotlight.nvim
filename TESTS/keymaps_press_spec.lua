@@ -116,8 +116,6 @@ function M.run()
   vim.api.nvim_win_set_cursor(0, { 1, 0 })
   press("2]k")
   t.eq("2]k: the count is honoured (two occurrences forward)", vim.api.nvim_win_get_cursor(0)[1], 4)
-  -- Start on the no-match line 3, not mid-line on line 4: from (4,4) the `z` flag of the backward
-  -- search skips the occurrence at (4,0) (see the vault task spotlight.nvim/back-jump-mid-line).
   vim.api.nvim_win_set_cursor(0, { 3, 0 })
   press("2[k")
   t.eq("2[k: the count is honoured (two occurrences back)", vim.api.nvim_win_get_cursor(0)[1], 1)

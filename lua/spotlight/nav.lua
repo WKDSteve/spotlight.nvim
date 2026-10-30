@@ -119,10 +119,11 @@ function M.jump(dir, count, all_scopes)
   end
 
   local opts = config.get("nav")
-  -- `s` sets the ' mark so `''` returns to where the jump started; `z` starts
-  -- the search at the cursor column rather than at column 0, so a second `]k`
-  -- on a line with two matches advances instead of re-finding the first.
-  local flags = (dir == 1 and "" or "b") .. "sz"
+  -- `s` sets the ' mark so `''` returns to where the jump started; `z` (forward
+  -- only) starts the search at the cursor column rather than at column 0, so a
+  -- second `]k` on a line with two matches advances instead of re-finding the
+  -- first. Backward it would skip a match left of the cursor on the same line.
+  local flags = dir == 1 and "sz" or "bs"
   if not opts.wrap then
     flags = flags .. "W"
   end

@@ -56,6 +56,25 @@ function M.run()
   vim.api.nvim_win_set_cursor(0, { 2, 0 })
   t.eq("nav/auto: nothing under the cursor on line 2", nav.under_cursor(), nil)
 
+  -- ---------- backward jump from mid-line ----------
+  --
+  -- Backward search must see a match left of the cursor on the same line
+  -- (the `z` flag would skip it and land on the previous line).
+  config.setup({ nav = { scope = "all", center = false, wrap = false } })
+  registry.clear()
+  registry.add({ text = "aaa", kind = "literal" })
+  vim.api.nvim_set_current_buf(t.fixture({ "aaa end", "aaa end" }))
+  registry.rebuild()
+  vim.api.nvim_win_set_cursor(0, { 2, 4 })
+  t.ok("nav/back: mid-line backward jump moves", nav.prev())
+  local back = vim.api.nvim_win_get_cursor(0)
+  t.eq("nav/back: stays on the same line", back[1], 2)
+  t.eq("nav/back: lands on the match left of the cursor", back[2], 0)
+  vim.api.nvim_set_current_buf(bufnr)
+  registry.clear()
+  registry.add({ text = "aaa", kind = "literal" })
+  registry.add({ text = "10.0.0.4", kind = "literal" })
+
   -- ---------- all_scopes forces the session-wide search ----------
   --
   -- `auto` narrowing is right until the moment you want the opposite, and the
