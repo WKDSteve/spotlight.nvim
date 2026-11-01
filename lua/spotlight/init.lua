@@ -226,33 +226,46 @@ function M.list_line(filter)
   require("spotlight.ui.list").open("line", filter)
 end
 
--- ---------- per-slot lock ----------
+-- ---------- per-slot lock and whole-line rendering ----------
+-- Both are one boolean property of an existing spotlight, set by exact text and toggled either by text or
+-- through the cursor token; flag_set / flag_toggle hold the shared flow, the four public functions only
+-- name the property.
 
---- Set whether the spotlight matching `text` exactly keeps its palette slot
---- permanently, never handing it to a different spotlight even once the
---- palette fills up.
----@param text string
----@param value boolean
----@return boolean changed
-function M.lock_set(text, value)
+---The spotlight whose text is exactly `text`, or `nil` after reporting that there is none.
+---@param text any
+---@return table|nil item
+local function find_or_report(text)
   local item = registry.find_by_text(text)
   if not item then
     report(("no spotlight for: %s"):format(tostring(text)), vim.log.levels.WARN)
+  end
+  return item
+end
+
+---Set the boolean property of the spotlight matching `text` exactly.
+---@param text string
+---@param value boolean
+---@param set fun(id: any, value: boolean) # registry setter of the property
+---@param label fun(value: boolean): string # message prefix for the new value
+---@return boolean changed
+local function flag_set(text, value, set, label)
+  local item = find_or_report(text)
+  if not item then
     return false
   end
-  registry.set_locked(item.id, value)
-  report(("%s: %s"):format(value and "locked" or "unlocked", item.text))
+  set(item.id, value)
+  report(("%s: %s"):format(label(value), item.text))
   return true
 end
 
---- Toggle the lock on the spotlight matching `text` exactly, or — with no
---- `text` — on whatever spotlight the cursor token resolves to, mirroring
---- `M.toggle`'s own resolution. Locking is only meaningful for a spotlight
---- that already exists, so an unresolved or not-yet-spotlighted token is
---- refused rather than silently doing nothing.
+---Toggle the property on the spotlight matching `text` exactly, or - with no `text` - on whatever
+---spotlight the cursor token resolves to. A property of a spotlight that already exists, so an unresolved
+---or not-yet-spotlighted token is refused rather than silently creating one.
 ---@param text string|nil
+---@param property string # field of the registry item that holds the current value
+---@param set_by_text fun(text: string, value: boolean): boolean
 ---@return boolean changed
-function M.lock_toggle(text)
+local function flag_toggle(text, property, set_by_text)
   local item
   if type(text) == "string" and text ~= "" then
     item = registry.find_by_text(text)
@@ -268,10 +281,31 @@ function M.lock_toggle(text)
     report(("no spotlight for: %s"):format(tostring(text)), vim.log.levels.WARN)
     return false
   end
-  return M.lock_set(item.text, not item.locked)
+  return set_by_text(item.text, not item[property])
 end
 
--- ---------- whole-line rendering ----------
+--- Set whether the spotlight matching `text` exactly keeps its palette slot
+--- permanently, never handing it to a different spotlight even once the
+--- palette fills up.
+---@param text string
+---@param value boolean
+---@return boolean changed
+function M.lock_set(text, value)
+  return flag_set(text, value, registry.set_locked, function(v)
+    return v and "locked" or "unlocked"
+  end)
+end
+
+--- Toggle the lock on the spotlight matching `text` exactly, or — with no
+--- `text` — on whatever spotlight the cursor token resolves to, mirroring
+--- `M.toggle`'s own resolution. Locking is only meaningful for a spotlight
+--- that already exists, so an unresolved or not-yet-spotlighted token is
+--- refused rather than silently doing nothing.
+---@param text string|nil
+---@return boolean changed
+function M.lock_toggle(text)
+  return flag_toggle(text, "locked", M.lock_set)
+end
 
 --- Set whether the spotlight matching `text` exactly is rendered across the
 --- whole line its match sits on, rather than over the matched text alone.
@@ -279,14 +313,9 @@ end
 ---@param value boolean
 ---@return boolean changed
 function M.line_set(text, value)
-  local item = registry.find_by_text(text)
-  if not item then
-    report(("no spotlight for: %s"):format(tostring(text)), vim.log.levels.WARN)
-    return false
-  end
-  registry.set_line(item.id, value)
-  report(("%s: %s"):format(value and "whole line" or "token only", item.text))
-  return true
+  return flag_set(text, value, registry.set_line, function(v)
+    return v and "whole line" or "token only"
+  end)
 end
 
 --- Toggle whole-line rendering on the spotlight matching `text` exactly, or —
@@ -300,22 +329,7 @@ end
 ---@param text string|nil
 ---@return boolean changed
 function M.line_toggle(text)
-  local item
-  if type(text) == "string" and text ~= "" then
-    item = registry.find_by_text(text)
-  else
-    local token = cursor.token()
-    if not token then
-      report("no token under the cursor", vim.log.levels.WARN)
-      return false
-    end
-    item = registry.find_by_text(token.text)
-  end
-  if not item then
-    report(("no spotlight for: %s"):format(tostring(text)), vim.log.levels.WARN)
-    return false
-  end
-  return M.line_set(item.text, not item.line)
+  return flag_toggle(text, "line", M.line_set)
 end
 
 -- ---------- navigation ----------
