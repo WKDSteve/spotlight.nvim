@@ -43,14 +43,16 @@ return {
         check = "K6",
         level = "error",
         text = "ui.kit.select",
-        reason = "ui.nvim is deliberately not on the runtimepath: health_spec.lua asserts the required-and-missing arm of :checkhealth",
+        reason = "ui.nvim is deliberately not on the runtimepath: health_spec.lua asserts the "
+          .. "required-and-missing arm of :checkhealth",
         expires = "2027-04-14",
       },
       {
         check = "K6",
         level = "warn",
         text = "termguicolors",
-        reason = "the headless conformance editor has no GUI or truecolor terminal, so 'termguicolors' is off; the health message is correct",
+        reason = "the headless conformance editor has no GUI or truecolor terminal, so 'termguicolors' is "
+          .. "off; the health message is correct",
         expires = "2027-04-14",
       },
     },
