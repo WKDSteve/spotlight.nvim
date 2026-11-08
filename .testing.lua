@@ -7,12 +7,12 @@ return {
   plugin = "spotlight",
   -- How the spec files are run: "auto" = sniffed per file, "h" = on the project's own TESTS/harness.lua,
   -- "script" = a self-running script in its own process.
-  dialect = "auto",
+  dialect = { ["TESTS/sheets_spec.lua"] = "busted", ["*"] = "auto" },
   -- Dependencies (directory names) put on the runtimepath: $<NAME>_DIR, .deps/<name>, ../<name>,
   -- stdpath('data')/lazy/<name>.
   -- ui.nvim is deliberately NOT a dependency here: health_spec.lua asserts that ui.kit.select is absent
   -- from the runtimepath (the required-and-missing arm of :checkhealth).
-  deps = { "lib.nvim" },
+  deps = { "lib.nvim", "testing.nvim" },
   -- "none" = all specs in one nvim, "file" = one nvim per spec file
   -- (nothing leaks from one file into the next).
   isolated = "file",
@@ -21,8 +21,9 @@ return {
   -- Guards (testing.nvim docs/GUARDS.md). The fleet measurement found nothing real here: with
   -- isolated = "file" the plugin store (lib.nvim cache) lives in the child sandbox and setup() state
   -- (autocmd groups, keymaps, mapleader) dies with the child, so every guard can be a hard error.
-  -- No guard_allow entries are needed: the specs spawn no executables, use no network and write
-  -- nothing outside the temp dir / child sandbox.
+  -- The specs spawn no executables, use no network and write nothing outside the temp dir / child sandbox;
+  -- the one exception is sheets_spec, which starts a child editor per test sheet (TESTS/sheets/).
+  guard_allow = { spawn = { "nvim" } },
   guards = {
     fs = "error",
     state = "error",
