@@ -41,7 +41,12 @@ function M.run()
 
   -- ---------- root() ----------
   local cwd = (vim.fn.getcwd():gsub("\\", "/"))
-  t.eq("root: resolves through the store, which is installed here", path.root(), cwd)
+  -- Against what the store answers, not against the cwd: the store's root is the git root when there is one, which
+  -- is the cwd only where the suite happens to run at the top of its checkout (a snapshot worktree of `ci commit`
+  -- need not). The fallback to the cwd is pinned below, with the store stubbed.
+  local store = require(STORE)
+  local expected = (store.root():gsub("\\", "/"):gsub("/+$", ""))
+  t.eq("root: resolves through the store, which is installed here", path.root(), expected)
 
   t.with_modules({ [STORE] = {
     root = function()
