@@ -107,3 +107,20 @@ and which question each page answers.
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 spotlight.nvim is released under the [MIT License](https://opensource.org/licenses/MIT).
+
+<!-- connections:begin (written by the app-icons tool of the workshop; change integrations.json there, not this block) -->
+## Connections
+
+![spotlight.nvim: what it uses and what uses it](assets/graphs/spotlight.nvim.png)
+
+**Uses**
+
+- [hover.nvim](https://github.com/WKDSteve/hover.nvim): spotlight.nvim registers a preview with hover.nvim (`hover.registry`). ([picture](assets/graphs/pair/spotlight.nvim--hover.nvim.png))
+- [ui.nvim](https://github.com/WKDSteve/ui.nvim): The menu integration of spotlight.nvim builds its entries with `ui.contextmenu` of ui.nvim; without it its list is empty. ([picture](assets/graphs/pair/spotlight.nvim--ui.nvim.png))
+- [lib.nvim](https://github.com/WKDSteve/lib.nvim): the shared base of the plugins.
+
+**Used by**
+
+- [filetree.nvim](https://github.com/WKDSteve/filetree.nvim): filetree.nvim adds the name of the node under the cursor to the markings of spotlight.nvim (`spotlight.add`). ([picture](assets/graphs/pair/filetree.nvim--spotlight.nvim.png))
+- [mdview.nvim](https://github.com/WKDSteve/mdview.nvim): mdview.nvim keeps its preview in step with spotlight.nvim by listening to its `SpotlightChanged` event (`spotlight.core.events`). ([picture](assets/graphs/pair/mdview.nvim--spotlight.nvim.png))
+<!-- connections:end -->
