@@ -43,11 +43,18 @@ local function collect(legacy)
   local saved = vim.health
   ---@diagnostic disable-next-line: assign-type-mismatch
   vim.health = api
-  local ok, err = pcall(function()
+  -- xpcall with a traceback: where the raise happened is read from the stack,
+  -- not from the message prefix, which belongs to whoever raised it (a
+  -- harness wrapping `require` re-raises with its own location).
+  local trace
+  local ok, err = xpcall(function()
     require("spotlight.health").check()
+  end, function(e)
+    trace = debug.traceback(tostring(e), 2)
+    return e
   end)
   vim.health = saved
-  return reports, ok, ok and nil or tostring(err)
+  return reports, ok, ok and nil or tostring(err), trace
 end
 
 ---@internal
@@ -218,11 +225,11 @@ function M.run()
   -- same probe the LIB_MODULES loop already performed. Pinned rather than fixed
   -- because it changes what `:checkhealth` prints.
   t.without_modules({ COMPOSER }, function()
-    local broken, ok, err = collect(false)
+    local broken, ok, err, trace = collect(false)
     t.ok("BUG: the missing composer IS reported first", has(broken, "error", COMPOSER))
     t.ok("BUG: and a good deal of the report was produced", #broken > 20)
     t.eq("BUG: but check() then raises instead of returning", ok, false)
-    t.contains("BUG: at the unguarded trailing composer call", err, "health.lua")
+    t.ok("BUG: raised from inside spotlight's own check()", (trace or ""):find("spotlight[/\\]health%.lua") ~= nil)
     t.contains("BUG: naming the module it just reported as missing", err, COMPOSER)
     -- The raise comes *after* health's own last line, which is what makes it
     -- look like a complete report followed by an unexplained stack trace: the
