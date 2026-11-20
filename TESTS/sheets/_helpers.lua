@@ -65,17 +65,47 @@ function _G.rows()
   return table.concat(out, "|")
 end
 
+---The spotlight whose text is `text`, or nil.
+---@param text string
+---@return table|nil
+function _G.item(text)
+  for _, item in ipairs(require("spotlight.core.registry").all()) do
+    if item.text == text then
+      return item
+    end
+  end
+  return nil
+end
+
+---How many spotlights there are.
+---@return integer
+function _G.count()
+  return #require("spotlight.core.registry").all()
+end
+
+---The cursor as "row:col" (1-based row, 0-based byte column).
+---@return string
+function _G.at()
+  local pos = vim.api.nvim_win_get_cursor(0)
+  return pos[1] .. ":" .. pos[2]
+end
+
 ---Open a small file as the current buffer, set the plugin up and stub the chooser.
-function _G.boot()
+---@param dir string|nil where the file lives; default a fresh temp directory. A directory that must outlive
+---the editor (a `restart` step deletes the old editor's temp directory) is passed here; an existing file
+---there is kept as it is.
+function _G.boot(dir)
   package.loaded["ui.kit.select"] = {
     open = function(opts)
       _G.chooser = opts
     end,
   }
-  _G.dir = vim.fn.tempname()
+  _G.dir = dir or vim.fn.tempname()
   vim.fn.mkdir(_G.dir, "p")
   _G.file = _G.dir .. "/a.txt"
-  vim.fn.writefile({ "foo bar foo", "baz foo bar", "bar only" }, _G.file)
+  if vim.fn.filereadable(_G.file) == 0 then
+    vim.fn.writefile({ "foo bar foo", "baz foo bar", "bar only" }, _G.file)
+  end
   require("spotlight").setup()
   vim.cmd("edit " .. vim.fn.fnameescape(_G.file))
   _G.forget()

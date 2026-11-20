@@ -8,6 +8,7 @@ return {
   id = "spotlight.commands",
   title = ":Spotlight sets, persist, winopt and list",
   task = "spotlight.nvim/testblatt-bindings-checkliste",
+  feature = "spotlight.state",
   sizes = { { rows = 30, cols = 100 } },
   steps = {
     { lua = [[dofile(vim.fn.getcwd() .. "/TESTS/sheets/_helpers.lua"); _G.boot()]] },
@@ -139,6 +140,5 @@ return {
   judge = { "the swatches in the list are the colors of the highlights in the text" },
   manual = {
     "`:Spotlight list` in the real chooser (ui.nvim): the float, the swatches and the keys inside it",
-    "persistence across an editor restart (`:Spotlight persist on`, quit, reopen the file)",
   },
 }
