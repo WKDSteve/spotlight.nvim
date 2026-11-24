@@ -100,29 +100,7 @@ local KNOWN = {
 ---@type table<string, true>
 local BOOL_OVERRIDABLE = { keymaps = true }
 
----@internal
---- `key` with the nearest known one as a hint when there is a plausible one
---- (edit distance <= 3) -- same pattern as cascade.nvim/buffer-ctx.nvim's
---- config modules.
----@param key any
----@param known table<string, any>
----@param prefix string
----@return string
-local function describe_unknown(key, known, prefix)
-  local levenshtein = require("lib.lua.strings.distance").levenshtein
-  local name = tostring(key)
-  local best, best_distance = nil, nil
-  for candidate in pairs(known) do
-    local d = levenshtein(name, candidate)
-    if d <= 3 and (best_distance == nil or d < best_distance) then
-      best, best_distance = candidate, d
-    end
-  end
-  if best then
-    return ("unknown option '%s%s' (did you mean '%s%s'?)"):format(prefix, name, prefix, best)
-  end
-  return ("unknown option '%s%s'"):format(prefix, name)
-end
+local describe_unknown = require("lib.lua.config.schema").describe_unknown
 
 ---@internal
 --- Reject what cannot be merged, before the merge (ERR-50): a misspelled key
