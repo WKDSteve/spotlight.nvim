@@ -19,8 +19,26 @@
 
 -- soft: without ui.nvim there is nothing to build entries with (the module still loads; `items()` is empty)
 local has_contextmenu, contextmenu = pcall(require, "ui.contextmenu")
+local nerd = require("lib.nvim.ui.nerd_font")
 
 local M = {}
+
+---@internal
+--- One glyph per entry, drawn in the renderer's icon column (`opts.icon`), never in the
+--- label: a label that starts with spaces or a glyph indents its row past every other one.
+--- ASCII fallback without a declared Nerd Font.
+---@type table<string, string>
+local ICON = {
+  here = nerd.glyph("F0335", "o"), -- lightbulb
+  every = nerd.glyph("F0336", "*"), -- lightbulb-outline
+  next = nerd.glyph("F0054", ">"), -- arrow-right
+  prev = nerd.glyph("F004D", "<"), -- arrow-left
+  line = nerd.glyph("F0C60", "l"), -- format-list-bulleted
+  quickfix = nerd.glyph("F0C60", "q"), -- format-list-bulleted
+  list = nerd.glyph("F0349", "/"), -- magnify
+  clear = nerd.glyph("F0156", "x"), -- close
+  spotlight = nerd.glyph("F0335", "s"), -- lightbulb
+}
 
 --- Whether a host that asks first (ui.nvim's `ui.menu`) may show this
 --- plugin's fly-out: `integrations.ui_menu` is not false and the `menu` group
@@ -54,26 +72,26 @@ function M.items()
 
   contextmenu.group(
     out,
-    contextmenu.entry(true, "  Spotlight this occurrence only", api.toggle_here, k.toggle_here),
-    contextmenu.entry(true, "  Spotlight every occurrence", api.toggle, k.toggle),
-    contextmenu.entry(true, "  Next occurrence", api.next, k.next),
-    contextmenu.entry(true, "  Previous occurrence", api.prev, k.prev)
+    contextmenu.entry(true, "Spotlight this occurrence only", api.toggle_here, k.toggle_here, { icon = ICON.here }),
+    contextmenu.entry(true, "Spotlight every occurrence", api.toggle, k.toggle, { icon = ICON.every }),
+    contextmenu.entry(true, "Next occurrence", api.next, k.next, { icon = ICON.next }),
+    contextmenu.entry(true, "Previous occurrence", api.prev, k.prev, { icon = ICON.prev })
   )
 
   contextmenu.group(
     out,
-    contextmenu.entry(true, "  Toggle whole-line rendering", function()
+    contextmenu.entry(true, "Toggle whole-line rendering", function()
       api.line_toggle(nil)
-    end, k.line),
-    contextmenu.entry(true, "  Send matches to quickfix", function()
+    end, k.line, { icon = ICON.line }),
+    contextmenu.entry(true, "Send matches to quickfix", function()
       api.quickfix(nil)
-    end, k.quickfix)
+    end, k.quickfix, { icon = ICON.quickfix })
   )
 
   contextmenu.group(
     out,
-    contextmenu.entry(true, "  Open spotlight list", api.list, k.list),
-    contextmenu.entry(true, "  Clear all spotlights", api.clear, k.clear)
+    contextmenu.entry(true, "Open spotlight list", api.list, k.list, { icon = ICON.list }),
+    contextmenu.entry(true, "Clear all spotlights", api.clear, k.clear, { icon = ICON.clear })
   )
 
   return out
@@ -82,13 +100,13 @@ end
 --- Convenience: the spotlight.nvim entries wrapped as a single nested
 --- submenu entry, for hosts that prefer a "Spotlight ▸" fly-out instead of
 --- inline entries. Returns nil when there is nothing to show.
----@param label? string submenu label (default "  Spotlight")
+---@param label? string submenu label (default "Spotlight")
 ---@return Ui.ContextMenu.Item|nil
 function M.submenu(label)
   if not has_contextmenu then
     return nil
   end
-  return contextmenu.submenu(label or "  Spotlight", M.items())
+  return contextmenu.submenu(label or "Spotlight", M.items(), { icon = ICON.spotlight })
 end
 
 return M

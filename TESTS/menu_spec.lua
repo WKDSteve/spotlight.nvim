@@ -155,24 +155,20 @@ function M.run()
     clear_entry.cmd()
     t.eq("items: its callback reached the facade", registry.count(), 0)
 
-    -- BUG-adjacent, pinned as a contract violation rather than a defect:
-    -- `ui.contextmenu.entry`'s own doc says a leading glyph belongs in
-    -- `opts.icon` and "never in `label`", because the kit renderer draws icons
-    -- as a column of their own — a label that starts with padding indents that
-    -- row past every other entry in the composed menu. Every spotlight label
-    -- starts with two spaces where a glyph was meant to go, and no entry passes
-    -- an `icon` at all.
+    -- `ui.contextmenu.entry`'s own doc: a leading glyph belongs in `opts.icon`, never in
+    -- `label`, because the kit renderer draws icons as a column of their own -- a label that
+    -- starts with padding indents that row past every other entry in the composed menu.
     local padded, iconless = 0, 0
     for _, it in ipairs(real) do
-      if it.name:sub(1, 2) == "  " then
+      if it.name:match("^%s") then
         padded = padded + 1
       end
-      if it.icon == nil then
+      if type(it.icon) ~= "string" or it.icon == "" then
         iconless = iconless + 1
       end
     end
-    t.eq("BUG: every label starts with the two spaces ui.contextmenu says not to use", padded, 8)
-    t.eq("BUG: and no entry uses the icon column that exists for it", iconless, 8)
+    t.eq("items: no label starts with a blank", padded, 0)
+    t.eq("items: every entry has an icon", iconless, 0)
   end)
 
   -- ---------- the opt-out ----------
@@ -201,7 +197,7 @@ function M.run()
   -- ---------- submenu ----------
   with_menu(function(menu)
     local sub = menu.submenu()
-    t.eq("submenu: has a default label", sub.name, "  Spotlight")
+    t.eq("submenu: has a default label", sub.name, "Spotlight")
     t.eq("submenu: wrapping the full entry list", #sub.items, #menu.items())
     local named = menu.submenu("Highlights")
     t.eq("submenu: an explicit label is used", named.name, "Highlights")
