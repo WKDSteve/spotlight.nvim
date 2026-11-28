@@ -3,7 +3,7 @@
 -- below would hide the very failure it exists to report.
 ---@diagnostic disable: need-check-nil
 -- TESTS/menu_spec.lua
--- `spotlight.integrations.menu`: the nvzone/menu-shaped entry list spotlight
+-- `spotlight.integrations.menu`: the context-menu entry list spotlight
 -- *provides* for a host to compose. Nothing in the suite touched it before,
 -- because the module binds `require("ui.contextmenu")` to a file-local at load
 -- time and ui.nvim is not on this suite's runtimepath.
@@ -127,7 +127,7 @@ function M.run()
     t.eq("items: and for navigation", real[3].rtxt, config.get("keymaps.next"))
     t.eq("items: ...both ways", real[4].rtxt, config.get("keymaps.prev"))
 
-    -- The visual-mode variants are deliberately absent: nvzone/menu restores the
+    -- The visual-mode variants are deliberately absent: the menu restores the
     -- triggering window before running a callback, so there is no selection left
     -- to read by then.
     local labels = {}

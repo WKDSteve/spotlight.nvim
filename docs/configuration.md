@@ -112,7 +112,7 @@ require("spotlight").setup({
   },
 
   menu = {
-    enable = true,            -- contribute entries to an nvzone/menu host
+    enable = true,            -- contribute entries to a context-menu host
   },
 
   integrations = {

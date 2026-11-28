@@ -79,8 +79,7 @@ meant the bare prefix. That trade already existed for the ~7 other real
 
 `spotlight.integrations.menu` contributes the normal-mode rows above
 (`toggle_here`, `toggle`, `next`, `prev`, `line_toggle`, `quickfix`, `list`,
-`clear` — not the `x`-mode `_selection` variants) as entries in the shape
-[nvzone/menu](https://github.com/nvzone/menu) expects. spotlight.nvim has no
+`clear` — not the `x`-mode `_selection` variants) as entries in the context-menu entry shape. spotlight.nvim has no
 dependency on `menu` and never opens a context menu itself. `menu.enable =
 false` opts out. See
 [FEATURES/INTEGRATIONS.md](FEATURES/INTEGRATIONS.md#right-click-context-menu).

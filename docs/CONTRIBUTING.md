@@ -75,7 +75,7 @@ a 200-line sample.
 | `lua/spotlight/core/palette.lua` | The eight colors, the round-robin, the locks, dark and light |
 | `lua/spotlight/core/count.lua` | On-demand match counting |
 | `lua/spotlight/ui/list.lua` | The list: swatch, token, count, jump |
-| `lua/spotlight/integrations/menu.lua` | The nvzone/menu entries |
+| `lua/spotlight/integrations/menu.lua` | The context-menu entries |
 | `lua/spotlight/bindings/` | `usrcmds.lua`, `keymaps.lua`, `autocmds.lua` — the last of which is the three window autocommands that make a window-local match look global |
 | `lua/spotlight/config/` | `DEFAULTS.lua` and the validating `get` |
 | `lua/spotlight/util/` | The lib.nvim delegates and path handling |
@@ -99,7 +99,7 @@ a 200-line sample.
    [`FEATURES/`](FEATURES/README.md).
 
 Normal-mode actions should also appear in
-`lua/spotlight/integrations/menu.lua`. Visual-mode ones must not: nvzone/menu
+`lua/spotlight/integrations/menu.lua`. Visual-mode ones must not: the menu
 restores the triggering window before running a callback, so there is no
 selection left by then.
 

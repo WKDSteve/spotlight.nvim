@@ -25,7 +25,6 @@ Optional, each detected at runtime and degrading to nothing when absent:
 | --- | --- |
 | `git` | Persistence keyed by git root. Without it, state falls back to the working directory |
 | [hover.nvim](https://github.com/WKDSteve/hover.nvim) | The occurrence count over a spotlighted token |
-| [nvzone/menu](https://github.com/nvzone/menu) | A host for the context-menu entries — see [FEATURES/INTEGRATIONS.md](FEATURES/INTEGRATIONS.md) |
 
 ## Which loading strategy
 

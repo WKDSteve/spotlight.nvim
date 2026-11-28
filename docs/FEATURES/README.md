@@ -30,7 +30,7 @@ pages below is verified against `lua/spotlight/` as it stands.
 | [RENDERING.md](RENDERING.md) | How a spotlight is shown: the eight-slot palette, slot locking, whole-line rendering, and what makes a window-local `matchadd()` look global |
 | [FINDING.md](FINDING.md) | Getting from "it is marked" to "I am looking at it": the list, `]k`/`[k`, the sign-column occurrence map, the quickfix filter, and yank |
 | [PERSISTENCE.md](PERSISTENCE.md) | What survives `:qa`: per-project state, named sets, the per-file opt-out, and why an exception is about a spotlight's origin rather than its appearances |
-| [INTEGRATIONS.md](INTEGRATIONS.md) | The soft dependencies: hover.nvim, which-key, nvzone/menu, and the plain-function facade every one of them binds onto |
+| [INTEGRATIONS.md](INTEGRATIONS.md) | The soft dependencies: hover.nvim, which-key, the context menu, and the plain-function facade every one of them binds onto |
 | [DIAGNOSTICS.md](DIAGNOSTICS.md) | When something looks wrong: `:checkhealth spotlight`, `debug = true`, `:Spotlight refresh`, and why an invalid config degrades instead of throwing |
 
 Each entry names the module behind it, its keymap and `:Spotlight` route, and

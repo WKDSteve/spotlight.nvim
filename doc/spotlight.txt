@@ -354,7 +354,7 @@ lua/spotlight/@types/), so lua_ls completes and checks the table.
         prev = "[k",
       },
       menu = {
-        enable = true,            -- contribute entries to an nvzone/menu host
+        enable = true,            -- contribute entries to a context-menu host
       },
       integrations = {
         ui_menu = true,           -- let ui.nvim's right-click menu show the fly-out

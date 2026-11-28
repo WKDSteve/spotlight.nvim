@@ -81,7 +81,7 @@ lua/spotlight/
     usrcmds.lua          the :Spotlight verb, as a composer route tree
     autocmds.lua         window fill, ColorScheme, load/flush
   integrations/
-    menu.lua             nvzone/menu entries (soft)
+    menu.lua             context-menu entries (soft)
   util/
     lib.lua              guarded lib.nvim bridge (notify/map/autocmd/hl/debounce/logger/dotrepeat)
     path.lua             project-relative file keys (cross-platform)

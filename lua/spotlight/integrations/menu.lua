@@ -1,8 +1,8 @@
 ---@module 'spotlight.integrations.menu'
----@brief Context-menu entries for nvzone/menu (soft, opt-in integration).
+---@brief Context-menu entries (soft, opt-in integration).
 ---@description
 --- spotlight.nvim does not depend on a menu plugin. It *provides* a list of
---- entries in the shape nvzone/menu expects, built with
+--- entries in the context-menu entry shape, built with
 --- `ui.contextmenu`'s helpers, and a host — typically the user's own
 --- RightMouse dispatcher — composes them into its own menu, e.g.:
 --- >
@@ -10,7 +10,7 @@
 ---   -- prepend/append `items` to your own menu table, then menu.open(composed)
 --- <
 --- General/any-buffer, mirroring `spotlight.bindings.keymaps`' normal-mode
---- actions only: nvzone/menu closes the menu and restores the triggering
+--- actions only: the menu closes and restores the triggering
 --- window/buffer before running a callback, so there is no active Visual
 --- selection by the time it fires — the `_selection` variants
 --- (`toggle_here_selection`, `toggle_selection`) are left out for that

@@ -195,9 +195,8 @@ local DEFAULTS = {
   },
 
   -- ---------- menu ----------
-  -- Right-click context menu (nvzone/menu, soft dependency; entries from
-  -- spotlight.integrations.menu). Off automatically when nvzone/menu isn't
-  -- installed -- this only gates whether M.items()/M.submenu() return
+  -- Right-click context menu (entries from
+  -- spotlight.integrations.menu). This only gates whether M.items()/M.submenu() return
   -- entries at all.
   menu = {
     enable = true,

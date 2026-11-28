@@ -132,7 +132,7 @@
 ---@field quickfix? Spotlight.QuickfixOpts
 ---@field persist? Spotlight.PersistOpts
 ---@field keymaps? Spotlight.KeymapOpts
----@field menu? Spotlight.MenuOpts # `spotlight.integrations.menu` (nvzone/menu context-menu contribution) opt-out.
+---@field menu? Spotlight.MenuOpts # `spotlight.integrations.menu` (context-menu contribution) opt-out.
 ---@field integrations? Spotlight.IntegrationsOpts # Which hosts may drive this plugin (`ui_menu`).
 ---@field notify? boolean # Report added/removed/cleared spotlights via `lib.nvim.notify`.
 ---@field debug? boolean # Structured debug logging at the decision points, via `lib.nvim.logger`.
@@ -141,7 +141,7 @@
 ---@field hover? boolean
 
 --- Opt-out for `spotlight.integrations.menu`. spotlight.nvim has no
---- nvzone/menu dependency itself; this only gates whether `M.items()`/
+--- menu dependency itself; this only gates whether `M.items()`/
 --- `M.submenu()` return entries.
 ---@class Spotlight.MenuOpts
 ---@field enable boolean # default true

@@ -38,9 +38,8 @@ there too.
 `spotlight.integrations.menu` contributes the normal-mode subset of the
 preset actions — spotlight this occurrence, spotlight every occurrence,
 next/previous, toggle whole-line rendering, quickfix, open the list, clear
-all — as entries in the shape [nvzone/menu](https://github.com/nvzone/menu)
-expects. The `_selection` variants are left out: a menu callback fires
-after nvzone/menu has already closed the menu and restored the triggering
+all — as entries in the context-menu entry shape. The `_selection` variants are left out: a menu callback fires
+after the menu has already closed and restored the triggering
 buffer, so there is no active Visual selection by the time it runs.
 spotlight.nvim has no dependency on `menu` and never opens a context menu
 itself — a host (typically your own `<RightMouse>` dispatcher) composes
